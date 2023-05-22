@@ -1,0 +1,76 @@
+{% extends 'main/base.html' %}
+{% block body %}
+
+
+            <div class="container-xxl py-5 bg-dark hero-header mb-5" style="background: linear-gradient(rgba(15, 23, 43, .5), rgba(15, 23, 43, .5)), url('{{ bg_img.bg_img.url }}');">
+                <div class="container text-center my-5 pt-5 pb-4">
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">{{ menu_title.title }}</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center text-uppercase">
+                            <li class="breadcrumb-item"><a href="{% url 'index' %}">{{ menu_title.home }}</a></li>
+                            <li class="breadcrumb-item"><a href="#">{{ menu_title.pages }}</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">{{ menu_title.menu }}</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- Menu Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <h5 class="section-title ff-secondary text-center text-primary fw-normal">{{ menu_title.subtitle }}</h5>
+                    <h1 class="mb-5">{{ menu_title.subtitle_text }}</h1>
+                </div>
+
+                <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
+
+                        {% for i in menu_group %}
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3 {% if i.num == 1 %}active{% endif %}" data-bs-toggle="pill" href="#tab-{{ i.num }}">
+                                <i class="fa fa-{{ i.fa_name }} fa-2x text-primary"></i>
+                                <div class="ps-3">
+                                    <small class="text-body">{{ i.title }} </small>
+                                    <h6 class="mt-n1 mb-0">{{ i.subtitle }}</h6>
+                                </div>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    
+                    
+                    <div class="tab-content">
+                        {% for i in menu_group %}
+                        <div id="tab-{{ i.num }}" class="tab-pane fade show p-0 {% if i.num == 1 %}active{% endif %}">
+                            <div class="row g-4">
+                                {% for j in i.menugroup.all %}
+                                <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="{{ j.img.url }}" alt="" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>{{ j.title }}</span>
+                                                <span class="text-primary">{{ j.price }}</span>
+                                            </h5>
+                                            <small class="fst-italic">{{j.text}}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Menu End -->
+        
+
+{% endblock %}

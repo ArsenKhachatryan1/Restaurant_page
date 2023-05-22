@@ -1,0 +1,20 @@
+{% extends 'main/base.html' %}
+{% block body %}
+
+<div class="container-xxl py-5 bg-dark hero-header mb-5" style="background: linear-gradient(rgba(15, 23, 43, .5), rgba(15, 23, 43, .5)), url('{{ bg_img.bg_img.url }}');">
+</div>
+</div>
+
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp">
+            <h1 class="mb-5">{{ message }}</h1>
+            <a href="{% url 'index' %}" class="btn btn-primary py-2 px-4">Go to Home Page</a>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

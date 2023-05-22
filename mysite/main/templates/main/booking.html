@@ -1,0 +1,97 @@
+{% extends 'main/base.html' %}
+{% block body %}
+
+            <div class="container-xxl py-5 bg-dark hero-header mb-5" style="background: linear-gradient(rgba(15, 23, 43, .5), rgba(15, 23, 43, .5)), url('{{ bg_img.bg_img.url }}');">
+                <div class="container text-center my-5 pt-5 pb-4">
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">{{ booking_title.title }}</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center text-uppercase">
+                            <li class="breadcrumb-item"><a href="{% url 'index' %}">{{ booking_title.home }}</a></li>
+                            <li class="breadcrumb-item"><a href="#">{{ booking_title.pages }}</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">{{ booking_title.booking }}</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- Reservation Start -->
+        <div class="container-xxl py-5 px-0 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="row g-0">
+                <div class="col-md-6">
+                    <div class="video" style="background: linear-gradient(rgba(15, 23, 43, .1), rgba(15, 23, 43, .1)), url('{{ bg_img.video_img.url }}');">
+                        <button type="button" class="btn-play" data-bs-toggle="modal" data-src="{{ booking_title.video_link }}" data-bs-target="#videoModal">
+                            <span></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-6 bg-dark d-flex align-items-center">
+                    <div class="p-5 wow fadeInUp" data-wow-delay="0.2s">
+                        <h5 class="section-title ff-secondary text-start text-primary fw-normal">{{ booking_title.subtitle }}</h5>
+                        <h1 class="text-white mb-4">{{ booking_title.subtitle_text }}</h1>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="hidden" class="form-control" name="name" id="name" placeholder="Your Name" value="{{ user.first_name }} {{ user.last_name }}">
+                                        <label for="name">{{ booking_title.name }}</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="hidden" class="form-control" name="email" id="email" placeholder="Your Email" value="{{ user.email}}">
+                                        <label for="email">{{ booking_title.email }}</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating date" id="date3" data-target-input="nearest">
+                                        <input type="text" class="form-control datetimepicker-input" name="date" id="datetime" placeholder="Date & Time" data-target="#date3" data-toggle="datetimepicker" />
+                                        <label for="datetime">{{ booking_title.date }}</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" name="people_count" id="people_count" placeholder="No Of People">
+                                        <label for="select1">{{ booking_title.people }}</label>
+                                      </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" placeholder="Special Request" name="message" id="message" style="height: 100px"></textarea>
+                                        <label for="message">{{ booking_title.request }}</label>
+                                    </div>
+                                </div>
+                                {{ form.captcha.as_widget }}
+                                <div class="col-12">
+                                    <button class="btn btn-primary w-100 py-3" type="submit">{{ booking_title.btn }}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content rounded-0">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Youtube Video</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- 16:9 aspect ratio -->
+                        <div class="ratio ratio-16x9">
+                            <iframe class="embed-responsive-item" src="" id="video" allowfullscreen allowscriptaccess="always"
+                                allow="autoplay"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Reservation Start -->
+        
+        {% endblock %}

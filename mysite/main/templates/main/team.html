@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %}
+{% block body %}
+
+
+            <div class="container-xxl py-5 bg-dark hero-header mb-5" style="background: linear-gradient(rgba(15, 23, 43, .5), rgba(15, 23, 43, .5)), url('{{ bg_img.bg_img.url }}');">
+                <div class="container text-center my-5 pt-5 pb-4">
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">{{ team_title.title }}</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center text-uppercase">
+                            <li class="breadcrumb-item"><a href="{% url 'index' %}">{{ team_title.home }}</a></li>
+                            <li class="breadcrumb-item"><a href="#">{{ team_title.pages }}</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">{{ team_title.team }}</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+        <!-- Team Start -->
+        
+        {% include 'inc/team_members.html' %}
+
+        <!-- Team End -->
+        
+
+{% endblock %}
