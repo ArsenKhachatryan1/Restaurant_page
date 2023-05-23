@@ -293,7 +293,7 @@ def answer(request):
 
 
 def register_request(request):
-    
+	global message
 	register_titles = Register_Titles.objects.all()[0]
 	footer_company = Footer_Company.objects.all()[0]
 	contact_adress = Contact_Adress.objects.all()[0]
@@ -319,11 +319,16 @@ def register_request(request):
 			email = EmailMessage(  
 						mail_subject, message, to=[to_email]  
 			)  
-			email.send()  
-			return HttpResponse('Please confirm your email address to complete the registration')  
-	else:  
-		form = NewUserForm()
+			email.send()
+			message = 'Please confirm your email address to complete the registration'
+			return redirect('answer')
+		else:  
+			message = 'Please Enter correct data. Thank You!!!'
+			return redirect('answer')
+		
+	form = NewUserForm()
 	
+
 	return render(request, 'main/register.html', {
 	'form':form, 
 	'act':'register_request','register_titles':register_titles,
